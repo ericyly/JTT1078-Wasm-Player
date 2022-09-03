@@ -1,0 +1,2 @@
+# VideoPlayByWASM
+浏览器中通过wasm技术无插件实现流媒体播放
