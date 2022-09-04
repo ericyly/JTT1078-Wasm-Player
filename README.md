@@ -2,11 +2,13 @@
 
 ```
 PC浏览器播放效果图（ 20 / 40 路)
+![](https://github.com/ericyly/VideoPlayByWASM/blob/master/image/%E5%9B%BE1.jpg)
+![](https://github.com/ericyly/VideoPlayByWASM/blob/master/image/%E5%9B%BE2.jpg)
 ```
 
 ```
 手机浏览器播放效果图（ 8 路）
-
+![](https://github.com/ericyly/VideoPlayByWASM/blob/master/image/%E5%9B%BE3.jpg)
 ```
 ## 一、演示系统使用说明
 
@@ -69,3 +71,5 @@ over web socket-->浏览器(拆包、解码、播放)。浏览器中由线程工
 ```
 2.上图为jiupin-352-288-time-15-audio.rtp媒体流文件的 16 进制显示。每个以 30316364 开始的数据段即为一个JT/T 1078 部标音视频数据包，数据包格式见部标文件5.5.3节码流数据报文定义。
 ```
+
+作者联系方式：23099004@qq.com
