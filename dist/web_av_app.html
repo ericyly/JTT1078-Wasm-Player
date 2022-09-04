@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Web Audio&Video Application-Rust supported</title>
+</head>
+
+<body>
+<div style="display: inline-block;margin-bottom: 10px;">
+    <label for="rows">rows:</label>
+    <input id="rows" name="rows:" type="number" value="2" >
+    <label for="rows">cols:</label>
+    <input id="cols" name="cols" type="number" value="3" >
+    <button onclick='startPlay()'>开始</button>
+    <button onclick='stopPlay()'>停止</button>
+    <label id ="audioCtlLabel" style="margin-left: 15px;" for="audioCtl">声音开关:</label>
+    <input id="audioCtl" onclick="audioToggle(this);" type="checkbox" value="1">
+</div>
+<script type='text/javascript' src="common.js"></script>
+<script type='text/javascript' src="jts_player.js"></script>
+<script type='text/javascript'>
+    const path = encodeURIComponent("[车牌号].[车牌颜色].[逻辑通道号].[音视频标志].[时效口令]");
+    const url = `ws://${location.host}/tm`;
+    //const url = `ws://${location.host}/tm/${path}`;
+    const log = new Logger("web monitor ");
+    let playContainer = null;
+    let rows = 3, cols = 4;
+    let playerWithAudio = null;
+
+    document.querySelector("#audioCtl").disabled = true;
+
+    function audioToggle(cb){
+        if(playerWithAudio == null)
+            return;
+        if(cb.checked)
+            playerWithAudio.openAudio();
+        else
+            playerWithAudio.closeAudio();
+    }
+
+    function startPlay() {
+        if(playContainer != null)
+            stopPlay();
+        playContainer = document.createElement("div");
+        document.body.append(playContainer);
+        const rowsInput = document.querySelector("#rows");
+        const colsInput = document.querySelector("#cols");
+        rows = parseInt(rowsInput.value);
+        cols = parseInt(colsInput.value);
+        log.info(`start ${rows * cols} players!`);
+        const randomNum = Math.floor(Math.random() * rows * cols);
+        for (let i = 1; i <= rows; ++i) {
+            const rowDiv = document.createElement("div");
+            playContainer.append(rowDiv);
+            for (let j = 1; j <= cols; ++j) {
+                const videoCanvas = document.createElement("canvas");
+                playContainer.append(videoCanvas);
+                videoCanvas.id = "videoCanvas" + ((i - 1) * cols + j);
+                videoCanvas.width = 235;//352;
+                videoCanvas.height = 192;//288;
+                const player = new JtsPlayer();
+                videoCanvas.player = player;
+                let playAudio = false;
+                if(randomNum == (i - 1) * cols + j){
+                    playAudio = true;
+                    playerWithAudio = player;
+                    document.querySelector("#audioCtl").disabled = false;
+                    document.querySelector("#audioCtl").checked = true;
+                }
+                player.play(url, videoCanvas, playAudio);
+            }
+        }
+    }
+
+    function stopPlay() {
+        document.querySelector("#audioCtl").checked = false;
+        document.querySelector("#audioCtl").disabled = true;
+        if (playContainer != null) {
+            log.info(`stop ${rows * cols} players!`);
+            for (let i = 1; i <= rows * cols; ++i) {
+                const videoCanvas = document.querySelector("#videoCanvas" + i);
+                if (videoCanvas && videoCanvas.player) {
+                    videoCanvas.player.stop();
+                    videoCanvas.player = null;
+                }
+            }
+            document.body.removeChild(playContainer);
+            playContainer = null;
+            playerWithAudio = null;
+        }
+    }
+</script>
+</body>
+</html>
