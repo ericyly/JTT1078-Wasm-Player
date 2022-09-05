@@ -9,7 +9,8 @@ PC浏览器播放效果图（20/40路)
 
 ## 一、演示系统使用说明
 
-1. 解压文件后，鼠标双击jts-svr.exe程序即可启动演示系统。看到控制台输出：jts-svr listening on: 0. 0. 0. 0 : 8088 ...，表明启动成功。linux系统可以使用jts-linux-svr.tar.gz文件
+1. 解压文件后，鼠标双击jts-svr.exe程序即可启动演示系统。看到控制台输出：jts-svr listening on: 0. 0. 0. 0 : 8088 ...，表明启动成功。linux系统可以使用jts-linux-svr
+文件
 
 2. 本机浏览器中输入(或鼠标点击此链接)：http://127.0.0.1:8088 ，回车即可看到演示系统页面，点击「start/开始」按钮开始播放，点击「stop/停止」停止播放。两个输入框表示期望演示视频通路的行列数，改变后，点击「start/开始」，即可看到所设定行列数积的视频通路，演示系统一般会随机打开某一路的声音，可点击「playaudio/声音开关」复选框关闭或打开声音。局域网中其他主机访问，可在浏览器中输入演示系统主机的实际IP地址和端口即可访问，如：192.168.*.*:8088 。
 
@@ -37,7 +38,7 @@ PC浏览器播放效果图（20/40路)
 
 4. 通过浏览器端主机性能充分应用，和服务器端媒体数据无转换延迟直接转发，用户将获得更佳使用体验，一方面音视频响应更快，另一方面可同时观看多路音视频播放。
 
-5. 在现有前端代码基础上，基于标准Web API可很方便自行实现视频全屏、拍照、录像等功能，相关API见：CanvasAPI、MediaStreamAPI。
+5. 在现有前端代码基础上，基于标准Web API可很方便自行实现视频全屏、拍照、录像等功能，相关API见：[CanvasAPI](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCanvasElement/toDataURL)、[MediaStreamAPI](https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasCaptureMediaStreamTrack)。
 
 ## 四、问题及解决
 
@@ -47,6 +48,8 @@ PC浏览器播放效果图（20/40路)
 
 1. jiupin-352-288-time-15-audio.rtp为模拟JT/T 1078 部标的音视频流文件，演示系统读取文件内容，通过网络传输到浏览器端，浏览器端直接解码播放，浏览器上每一个播放媒体流代表一路车载监控音视频。
 
+![图4](https://user-images.githubusercontent.com/112754795/188494589-11844191-afe5-4c0b-ba78-30e12f8b354a.jpg)
 2. 上图为jiupin-352-288-time-15-audio.rtp媒体流文件的 16 进制显示。每个以 30316364 开始的数据段即为一个JT/T 1078 部标音视频数据包，数据包格式见部标文件5.5.3节码流数据报文定义。
+![图5](https://user-images.githubusercontent.com/112754795/188494738-10653744-97cc-4f3a-9fe6-d7f5cf7f11d9.jpg)
 
 作者联系方式：23099004@qq.com
