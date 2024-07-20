@@ -51,5 +51,3 @@ PC浏览器播放效果图（20/40路)
 ![图4](https://user-images.githubusercontent.com/112754795/188494589-11844191-afe5-4c0b-ba78-30e12f8b354a.jpg)
 2. 上图为jiupin-352-288-time-15-audio.rtp媒体流文件的 16 进制显示。每个以 30316364 开始的数据段即为一个JT/T 1078 部标音视频数据包，数据包格式见部标文件5.5.3节码流数据报文定义。
 ![图5](https://user-images.githubusercontent.com/112754795/188494738-10653744-97cc-4f3a-9fe6-d7f5cf7f11d9.jpg)
-
-作者联系方式：23099004@qq.com
